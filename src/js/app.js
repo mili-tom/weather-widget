@@ -4,5 +4,7 @@ navigator.geolocation.getCurrentPosition(position => {
   homeLat = position.coords.latitude; 
   homeLong = position.coords.longitude;
 
-  console.log(homeLat, homeLong);
+  fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${homeLat}&lon=${homeLong}&units=metric&appid=${APIkey}`)
+    .then(response => response.json())
+    .then(json => console.log(json));
 });
