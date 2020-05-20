@@ -6,7 +6,16 @@ navigator.geolocation.getCurrentPosition(position => {
 
   fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${homeLat}&lon=${homeLon}&units=metric&appid=${APIkey}`)
     .then(response => response.json())
-    .then(currentData => displayCurrentWeather(currentData));
+    .then(currentData => {
+      fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${homeLat}&lon=${homeLon}&units=metric&appid=${APIkey}`)
+        .then(response => response.json())
+        .then(forecastData => {
+          displayCurrentWeather(currentData);
+          //displayForecast(forecastData);
+          console.log(currentData);
+          console.log(forecastData.list);
+        });      
+    });   
 });
 
 //https://www.w3schools.com/charsets/ref_utf_letterlike.asp (for Celsius degree)
