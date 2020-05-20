@@ -2,9 +2,22 @@ const APIkey = '8f3863754990ba6491b24790400e0681';
 
 navigator.geolocation.getCurrentPosition(position => {
   homeLat = position.coords.latitude; 
-  homeLong = position.coords.longitude;
+  homeLon = position.coords.longitude;
 
-  fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${homeLat}&lon=${homeLong}&units=metric&appid=${APIkey}`)
+  fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${homeLat}&lon=${homeLon}&units=metric&appid=${APIkey}`)
     .then(response => response.json())
-    .then(json => console.log(json));
+    .then(currentData => displayCurrentWeather(currentData));
 });
+
+//https://www.w3schools.com/charsets/ref_utf_letterlike.asp (for Celsius degree)
+function displayCurrentWeather(query) {
+  const currentElem = document.querySelector('.current-conditions');
+  currentElem.insertAdjacentHTML('beforeend', 
+        `<img src="http://openweathermap.org/img/wn/${query.weather[0].icon}@2x.png">
+        <div class="current">
+          <div class="temp">${Math.round(query.main.temp)}&#8451;</div>
+          <div class="condition">${query.weather[0].description}</div>
+        </div>
+      </div>`
+  )
+}
