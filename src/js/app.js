@@ -44,7 +44,27 @@ function groupForecastData(listOfDays) {
     }            
   }
   
-  //extractForecastData(objectOfDays);
+  extractForecastData(objectOfDays);
+}
+
+function extractForecastData(groupedData) {
+  Object.keys(groupedData).forEach(function(day) {
+    console.log(day, groupedData[day]);
+    const noonValue = [];
+    const minTemp = [];
+    const maxTemp = [];
+
+    groupedData[day].forEach(value => {     
+      if (value.dt_txt.includes("12:00:00")) {
+        noonValue.push(value);
+      }
+
+      minTemp.push(value.main.temp_min);
+      maxTemp.push(value.main.temp_max);        
+    })
+
+    //displayForecast(day, noonValue, Math.round(Math.min(...minTemp)), Math.round(Math.max(...maxTemp))); //source for Math.min and Math.max: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/min  
+  });
 }
 
 function nameCurrentDay() {  
