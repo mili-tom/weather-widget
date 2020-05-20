@@ -12,7 +12,7 @@ navigator.geolocation.getCurrentPosition(position => {
         .then(response => response.json())
         .then(forecastData => {
           displayCurrentWeather(currentData);
-          //groupForecastData(forecastData.list);               
+          groupForecastData(forecastData.list);               
         });      
     });   
 });
@@ -29,9 +29,28 @@ function displayCurrentWeather(query) {
   )
 }
 
+function groupForecastData(listOfDays) {
+  const today = nameCurrentDay();  
+  const objectOfDays = {};
+
+  for (let i = 0; i < listOfDays.length; i++) {  
+    let forecastDay = nameForecastDays((listOfDays[i].dt_txt).slice(0, 10));          
+    if (forecastDay !== today) {
+      if (objectOfDays[forecastDay] === undefined) {
+        objectOfDays[forecastDay] = [listOfDays[i]]
+      } else {
+        objectOfDays[forecastDay].push(listOfDays[i]);
+      }
+    }            
+  }
+  
+  //extractForecastData(objectOfDays);
+}
+
 function nameCurrentDay() {  
   const currentDayNum = new Date().getDay();
   const currentDay = weekDays[currentDayNum - 1];
 
   return currentDay;
 }
+
