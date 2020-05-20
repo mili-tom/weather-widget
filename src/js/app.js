@@ -54,3 +54,9 @@ function nameCurrentDay() {
   return currentDay;
 }
 
+function nameForecastDays(date) {     
+  const forecastDayNum = new Date(date).getDay(); 
+  const forecastDay = weekDays[forecastDayNum];
+
+  return forecastDay;
+}
