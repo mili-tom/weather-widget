@@ -26,7 +26,7 @@ function displayCurrentWeather(query) {
       <div class="temp">${Math.round(query.main.temp)}&#8451;</div>
       <div class="condition">${query.weather[0].description}</div>
     </div>`
-  )
+  );
 }
 
 function groupForecastData(listOfDays) {
@@ -37,7 +37,7 @@ function groupForecastData(listOfDays) {
     let forecastDay = nameForecastDays((listOfDays[i].dt_txt).slice(0, 10));          
     if (forecastDay !== today) {
       if (objectOfDays[forecastDay] === undefined) {
-        objectOfDays[forecastDay] = [listOfDays[i]]
+        objectOfDays[forecastDay] = [listOfDays[i]];
       } else {
         objectOfDays[forecastDay].push(listOfDays[i]);
       }
@@ -63,8 +63,22 @@ function extractForecastData(groupedData) {
       maxTemp.push(value.main.temp_max);        
     })
 
-    //displayForecast(day, noonValue, Math.round(Math.min(...minTemp)), Math.round(Math.max(...maxTemp))); //source for Math.min and Math.max: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/min  
+    displayForecast(day, noonValue, Math.round(Math.min(...minTemp)), Math.round(Math.max(...maxTemp))); //source for Math.min and Math.max: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/min  
   });
+}
+
+function displayForecast(day, noon, min, max) {
+  const forecastElem = document.querySelector('.forecast');  
+  forecastElem.insertAdjacentHTML('beforeend', 
+    `<div class="day">
+      <h3>${day}</h3>
+      <img src="http://openweathermap.org/img/wn/${noon[0].weather[0].icon}@2x.png" />
+      <div class="description">${noon[0].weather[0].description}</div>
+      <div class="temp"> 
+        <span class="high">${max}&#8451;</span>/<span class="low">${min}&#8451;</span>
+      </div>
+    </div>`
+  );
 }
 
 function nameCurrentDay() {  
