@@ -48,8 +48,7 @@ function groupForecastData(listOfDays) {
 }
 
 function extractForecastData(groupedData) {
-  Object.keys(groupedData).forEach(function(day) {
-    console.log(day, groupedData[day]);
+  Object.keys(groupedData).forEach(function(day) {    
     const noonValue = [];
     const minTemp = [];
     const maxTemp = [];
@@ -63,7 +62,7 @@ function extractForecastData(groupedData) {
       maxTemp.push(value.main.temp_max);        
     })
 
-    displayForecast(day, noonValue, Math.round(Math.min(...minTemp)), Math.round(Math.max(...maxTemp))); //source for Math.min and Math.max: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/min  
+    displayForecast(day, noonValue, Math.round(Math.min(...minTemp)), Math.round(Math.max(...maxTemp))); //source for Math.min() and Math.max(): https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/min  
   });
 }
 
