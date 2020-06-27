@@ -1,5 +1,7 @@
 # weather-widget
-Based on user location, this app shows the current weather and 5 day forecast.
+<p>Based on user location, this app shows the current weather and 5 day forecast.</p>
+<p>Project page: https://mili-tom.github.io/weather-widget/</p>
+
 <p>
 <img src="/src/images/forecast.png">
 </p>
