@@ -1,7 +1,3 @@
----
-permalink: /src/index.html
----
-
 # weather-widget
 Based on user location, this app shows the current weather and 5 day forecast.
 <p>
